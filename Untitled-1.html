@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #chat-container {
+            width: 400px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        #chat-messages {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .user {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <ul id="chat-messages">
+            <!-- Messages will be displayed here -->
+        </ul>
+    </div>
+    <form id="chat-form">
+        <input type="text" id="message" placeholder="Type your message...">
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        // Function to submit the form
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let messageInput = document.getElementById('message');
+            let message = messageInput.value.trim();
+            if (message !== '') {
+                appendMessage('You', message);
+                messageInput.value = '';
+            }
+        });
+
+        // Function to append a new message to the chat
+        function appendMessage(user, message) {
+            let chatMessages = document.getElementById('chat-messages');
+            let li = document.createElement('li');
+            li.classList.add('message');
+            li.innerHTML = '<span class="user">' + user + ':</span> ' + message;
+            chatMessages.appendChild(li);
+            document.getElementById('chat-container').scrollTop = document.getElementById('chat-container').scrollHeight;
+        }
+    </script>
+</body>
+</html>
